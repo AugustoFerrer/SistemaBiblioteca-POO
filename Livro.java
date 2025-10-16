@@ -2,11 +2,11 @@ public class Livro {
    
     private String titulo;
     private String autor;
-    private double isbn;
+    private int isbn;
     private boolean disponivel;
 
     //CONSTRUTOR COM TODO LIVRO AO SER CRIADO, SER DISPONÍVEL PRA EMPRÉSTIMO
-    public Livro (String titulo, String autor, double isbn){
+    public Livro (String titulo, String autor, int isbn){
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
@@ -48,7 +48,7 @@ public class Livro {
         return this.autor;
     }
 
-    public double getIsbn(){
+    public int getIsbn(){
         return this.isbn;
     }
 
