@@ -4,11 +4,16 @@ public class Emprestimo {
     
     private Usuario usuario;
     private Livro livro;
-    private LocalDate dataIni = LocalDate.now();
-    private LocalDate dataFim = dataIni.plusDays(14); //criando data final com 14 dias apos a data inicial
+    private LocalDate dataIni;
+    private LocalDate dataFim;
+    private boolean ativo;
 
-
-
-
+    public Emprestimo(Usuario usuario, Livro livro){
+        this.usuario = usuario;
+        this.livro = livro;
+        this.dataIni = LocalDate.now();
+        this.dataFim = dataIni.plusDays(14);
+        this.ativo = true;
+    }
 
 }
