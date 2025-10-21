@@ -35,21 +35,21 @@ public class Emprestimo {
 
     //METODOS DO EMPRESTIMO
     public boolean registrarDevolução(){
-
+        if (this.dataEntregue != null) return false; //se ja tiver sido entrege, faz nada
+        this.dataEntregue = LocalDate.now();
+        return true;
     }
 
 
     public boolean isAtrasado(){
 
-    }
-
-
-    public boolean registrarDevolução(){
 
     }
+
 
     public double totalMulta(){
-        if (isAtrasado == false) return 0;
+        if (isAtrasado() == false) return 0;
+
     }
     
     //GETTERS
