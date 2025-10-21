@@ -1,59 +1,58 @@
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Emprestimo {
     
     private Usuario usuario;
     private Livro livro;
-    private final double multaDiaria = 1.5;
     private LocalDate dataIni;
     private LocalDate dataEntregue;
     private LocalDate dataFim;
-    // private int diasAtrasado;
-    // private boolean atrasado;        ESSES ATRIBUTOS MUDAM COM O TEMPO
-    // private boolean ativo;
+    private final double multaDiaria;
 
 
     public Emprestimo(Usuario usuario, Livro livro){
-        if (this.usuario == null) throw new IllegalArgumentException(); //se usuario for null, ja barra
+        if (usuario == null) throw new IllegalArgumentException("USUÁRIO NULO"); //se usuario for null, ja barra
         this.usuario = usuario;
         
-        if (this.livro == null || this.livro.isDisponivel() == false) throw new IllegalArgumentException(); //se livro for null ou livro nao tiver disponivel, ja barra
+        if (livro == null || livro.isDisponivel() == false) throw new IllegalArgumentException("LIVRO NÃO DISPONÍVEL"); //se livro for null ou livro nao tiver disponivel, ja barra
         this.livro = livro;
+        livro.Emprestar();
         
         this.dataIni = LocalDate.now();
-        
         this.dataEntregue = null;
-        
         this.dataFim = dataIni.plusDays(14);
-        
-        // this.diasAtrasado = 0;
-        
-        // this.atrasado = false;
-        
-        // this.ativo = true;
+        this.multaDiaria = 1.50;
     }
 
     //METODOS DO EMPRESTIMO
+    public boolean isAtivo(){
+        return this.dataEntregue == null;
+    }
+    
     public boolean registrarDevolução(){
-        if (this.dataEntregue != null) return false; //se ja tiver sido entrege, faz nada
+        if (isAtivo() == false) return false; //se ja tiver sido entrege, faz nada
         this.dataEntregue = LocalDate.now();
         return true;
     }
 
+    public boolean foiEntregueComAtraso(){
+        if (isAtivo()) return false; //se ta ativo, não foi entregue ainda
+        return (dataEntregue.isAfter(this.dataFim)); //vê se a data entregue eh depois do prazo final, se sim, foi entregue com atraso
+    }
 
-    public boolean isAtrasado(){
+    public long getDiasAtrasado(){
+        if (foiEntregueComAtraso() == false) return 0; //aqui nao tem dias atrasado ja que foi entregue dentro do prazo
+        long diasDeAtraso = ChronoUnit.DAYS.between(this.dataFim, this.dataEntregue);
+        return diasDeAtraso;
+    }
 
-
+    public double getTotalMulta(){
+        return (getDiasAtrasado() * this.multaDiaria);
     }
 
 
-    public double totalMulta(){
-        if (isAtrasado() == false) return 0;
-
-    }
-    
     //GETTERS
-
     public Usuario getUsuario(){
         return this.usuario;
     }
@@ -73,16 +72,4 @@ public class Emprestimo {
     public LocalDate getDataFim(){
         return this.dataFim;
     }
-
-    // public boolean isAtrasado(){
-    //     return this.atrasado;
-    // }
-
-    // public int getDiasAtrasado(){
-    //     return this.diasAtrasado;
-    // }
-    
-    // public boolean isAtivo(){
-    //         return this.ativo;
-    //     }
 }
