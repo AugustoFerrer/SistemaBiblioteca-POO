@@ -16,10 +16,26 @@ public class Usuario {
         this.emprestimos = new ArrayList<>();
     }
 
-    // public ... PegarEmprestado(Livro livro){
+    //SE LISTA DE EMPRESTIMOS FOR MAIOR OU IGUAL A 3, NAO FAZ NADA, CASO SEJA MENOR, ADICIONA NA LISTA 
+    public boolean addEmprestimo(Emprestimo e){
+        if (this.emprestimos.size() >= 3) return false;
+        emprestimos.add(e);
+        return true;
+    }
+
+    public boolean removeEmprestimo(Emprestimo e){
+        
+    }
 
 
-    // }
+
+
+
+
+
+
+
+
 
 
 

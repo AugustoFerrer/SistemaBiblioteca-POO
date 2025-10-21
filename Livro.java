@@ -13,26 +13,20 @@ public class Livro {
         this.disponivel = true;
     }
 
-    //RETORNA SE LIVRO PODE SER EMPRESTADO (TRUE) OU NÃO (FALSE)
+    //RETORNA SE LIVRO PODE SER EMPRESTADO (TRUE) OU NÃO (FALSE) 
+    // SERIA TIPO UM "DESATIVAR"
     public boolean Emprestar(){
-        if (!this.disponivel){
-            return false;
+        if (!this.disponivel) return false; //ja está emprestado
+        this.disponivel = false;
+        return true;
         }
-        else{
-            this.disponivel = false;
-            return true;
-        }
-    }
     
     //RETORNA SE LIVRO PODE SER DEVOLVIDO (TRUE) OU NÃO (FALSE)
+    // SERIA TIPO UM "ATIVAR"
     public boolean Devolver(){
-        if (this.disponivel){
-            return false;
-        }
-        else{
-            this.disponivel = false;
-            return true;
-        }
+        if (this.disponivel) return false; //ja está devolvido
+        this.disponivel = true;
+        return true;
     }
 
     //GETTERS
