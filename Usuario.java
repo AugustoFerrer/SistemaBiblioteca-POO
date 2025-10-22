@@ -20,7 +20,7 @@ public class Usuario {
 
     //SE LISTA DE EMPRESTIMOS FOR MAIOR OU IGUAL A 3, NAO FAZ NADA, CASO SEJA MENOR, ADICIONA NA LISTA 
     public boolean addEmprestimo(Emprestimo e){
-        if (this.podePegarEmprestado() == false || e.isAtivo() == true) return false; //se chegou no lim. de emprest. ou emprest. ja estiver ativo, nao add o emprestimo
+        if (!this.podePegarEmprestado()) return false; //se chegou no lim. de emprest. ou emprest. ja estiver ativo, nao add o emprestimo
         emprestimos.add(e);
         return true;
     }
@@ -32,7 +32,7 @@ public class Usuario {
     }
 
     public boolean podePegarEmprestado(){
-        return this.emprestimos.size() >= getLimiteEmprestimos();
+        return this.emprestimos.size() < getLimiteEmprestimos();
     }
 
     // GETTERS
