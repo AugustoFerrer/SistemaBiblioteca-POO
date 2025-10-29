@@ -20,17 +20,15 @@ public class Usuario {
 
     //SE LISTA DE EMPRESTIMOS FOR MAIOR OU IGUAL A 3, NAO FAZ NADA, CASO SEJA MENOR, ADICIONA NA LISTA 
     public boolean addEmprestimo(Emprestimo e){
-        if (!this.podePegarEmprestado()) return false; 
+        if (!this.podePegarEmprestado()) return false; //se chegou no lim. de emprest. ou emprest. ja estiver ativo, nao add o emprestimo
         emprestimos.add(e);
         return true;
     }
 
     public boolean removeEmprestimo(Emprestimo e){
-        if (emprestimos.contains(e)) {
-            emprestimos.remove(e);
-            return true;
-        }
-        return false; // Não encontrou o empréstimo na lista
+        if (e.isAtivo() == false || emprestimos.contains(e) == false) return false; //se nao ta mais ativo, ja foi removido. Se emprest. n tiver em lista, n tem pra q remover
+        emprestimos.remove(e);
+        return true;
     }
 
     public boolean podePegarEmprestado(){

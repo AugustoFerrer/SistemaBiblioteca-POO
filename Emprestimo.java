@@ -30,9 +30,9 @@ public class Emprestimo {
         return this.dataEntregue == null;
     }
     
-    public boolean registrarDevolução(LocalDate dataDaDevolucao){
+    public boolean registrarDevolução(){
         if (isAtivo() == false) return false; //se ja tiver sido entrege, faz nada
-        this.dataEntregue = dataDaDevolucao;
+        this.dataEntregue = LocalDate.now();
         return true;
     }
 
