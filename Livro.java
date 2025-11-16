@@ -36,7 +36,7 @@ public class Livro {
 
     public String getTitulo(){
         return this.titulo;
-    }
+    }   
 
     public String getAutor(){
         return this.autor;
